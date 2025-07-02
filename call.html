@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Video Call</title>
+  <style>
+    video {
+      width: 45%;
+      margin: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Video Call</h2>
+  <video id="localVideo" autoplay muted playsinline></video>
+  <video id="remoteVideo" autoplay playsinline></video>
+
+  <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+  <script>
+    const socket = io();
+    const room = 'default_room';
+
+    const localVideo = document.getElementById('localVideo');
+    const remoteVideo = document.getElementById('remoteVideo');
+
+    let localStream;
+    let peerConnection;
+
+    const config = {
+      iceServers: [{ urls: 'stun:stun.l.google.com:19302' }]
+    };
+
+    navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+      .then(stream => {
+        localVideo.srcObject = stream;
+        localStream = stream;
+        socket.emit('join-call', { room });
+      });
+
+    socket.on('call-ready', async () => {
+      peerConnection = new RTCPeerConnection(config);
+      localStream.getTracks().forEach(track => peerConnection.addTrack(track, localStream));
+
+      peerConnection.onicecandidate = ({ candidate }) => {
+        if (candidate) socket.emit('ice-candidate', { candidate, room });
+      };
+
+      peerConnection.ontrack = ({ streams: [stream] }) => {
+        remoteVideo.srcObject = stream;
+      };
+
+      const offer = await peerConnection.createOffer();
+      await peerConnection.setLocalDescription(offer);
+      socket.emit('offer', { offer, room });
+    });
+
+    socket.on('offer', async ({ offer }) => {
+      peerConnection = new RTCPeerConnection(config);
+      localStream.getTracks().forEach(track => peerConnection.addTrack(track, localStream));
+
+      peerConnection.onicecandidate = ({ candidate }) => {
+        if (candidate) socket.emit('ice-candidate', { candidate, room });
+      };
+
+      peerConnection.ontrack = ({ streams: [stream] }) => {
+        remoteVideo.srcObject = stream;
+      };
+
+      await peerConnection.setRemoteDescription(offer);
+      const answer = await peerConnection.createAnswer();
+      await peerConnection.setLocalDescription(answer);
+      socket.emit('answer', { answer, room });
+    });
+
+    socket.on('answer', ({ answer }) => {
+      peerConnection.setRemoteDescription(answer);
+    });
+
+    socket.on('ice-candidate', ({ candidate }) => {
+      peerConnection.addIceCandidate(candidate);
+    });
+  </script>
+</body>
+</html>

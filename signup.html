@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block title %}Register - SoulSwipe{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/signup.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="signup-container">
+    <h2>Create Your Account</h2>
+    <form method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" name="username" id="username" required placeholder="Enter a unique username">
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" required placeholder="Enter your email">
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password" required placeholder="Create a password">
+        </div>
+
+        <div class="form-group">
+            <label for="password2">Confirm Password:</label>
+            <input type="password" name="password2" id="password2" required placeholder="Re-enter your password">
+        </div>
+
+        <div class="form-group">
+            <label for="profile_picture">Profile Picture:</label>
+            <input type="file" name="profile_picture" id="profile_picture" accept="image/*">
+        </div>
+
+        <div class="form-group">
+            <label for="age">Age:</label>
+            <input type="number" name="age" id="age" required min="18" max="80" placeholder="Enter your age (18–80)">
+        </div>
+
+        <div class="form-group">
+            <label for="gender">Gender:</label>
+            <select name="gender" id="gender" required>
+                <option value="">Select...</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="location">District:</label>
+            <select name="location" id="location" required>
+                <option value="">Select your district...</option>
+                <option value="Balaka">Balaka</option>
+                <option value="Blantyre">Blantyre</option>
+                <option value="Chikwawa">Chikwawa</option>
+                <option value="Chiradzulu">Chiradzulu</option>
+                <option value="Chitipa">Chitipa</option>
+                <option value="Dedza">Dedza</option>
+                <option value="Dowa">Dowa</option>
+                <option value="Karonga">Karonga</option>
+                <option value="Kasungu">Kasungu</option>
+                <option value="Likoma">Likoma</option>
+                <option value="Lilongwe">Lilongwe</option>
+                <option value="Machinga">Machinga</option>
+                <option value="Mangochi">Mangochi</option>
+                <option value="Mchinji">Mchinji</option>
+                <option value="Mulanje">Mulanje</option>
+                <option value="Mwanza">Mwanza</option>
+                <option value="Mzimba">Mzimba</option>
+                <option value="Nkhata Bay">Nkhata Bay</option>
+                <option value="Nkhotakota">Nkhotakota</option>
+                <option value="Nsanje">Nsanje</option>
+                <option value="Ntcheu">Ntcheu</option>
+                <option value="Ntchisi">Ntchisi</option>
+                <option value="Phalombe">Phalombe</option>
+                <option value="Rumphi">Rumphi</option>
+                <option value="Salima">Salima</option>
+                <option value="Thyolo">Thyolo</option>
+                <option value="Zomba">Zomba</option>
+                <option value="Neno">Neno</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="bio">Bio:</label>
+            <textarea name="bio" id="bio" rows="4" placeholder="Tell us something about you..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Sign Up</button>
+
+        <p class="auth-footer">
+            Already have an account? <a href="{{ url_for('index') }}">Login here</a>
+        </p>
+    </form>
+</div>
+{% endblock %}
