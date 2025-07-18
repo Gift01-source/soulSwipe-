@@ -5,17 +5,14 @@ SoulSwipe is a modern dating app designed to help people connect, chat, and find
 
 ## Features
 
-- **User Profiles:** Create and customize your profile with photos and personal information.
-- **Swipe Matching:** Swipe right to like and left to pass, just like your favorite dating apps.
-- **Real-time Chat:** Instantly connect and chat with your matches.
-- **Photo Upload:** Share your best moments with potential matches.
-- **Location-Based Matching:** Find people near you.
-- **Secure Authentication:** Safe sign-up and login with account protection.
-- **Profile Discovery:** Browse and search for interesting users.
+User Profiles: Create and customize your profile with photos and personal information.
+-Swipe Matching: Swipe right to like and left to pass, just like your favorite dating apps.
+- Real-time Chat: Instantly connect and chat with your matches.
+- Photo Upload: Share your best moments with potential matches.
+- Location-Based Matching: Find people near you.
+- Secure Authentication: Safe sign-up and login with account protection.
+- Profile Discovery: Browse and search for interesting users.
 
-## Screenshots
-
-_Add screenshots here if available._
 
 ## Getting Started
 
