@@ -1,4 +1,12 @@
-odal -->
+{% extends "base.html" %}
+
+{% block title %}Register - SoulSwipe{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/signup.css') }}">
+{% endblock %}
+
+{% block content %}
     <div class="modal" id="login-modal">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
