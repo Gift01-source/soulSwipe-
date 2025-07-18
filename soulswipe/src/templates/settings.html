@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Settings - SoulSwipe{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/settings.css') }}">
+{% endblock %}
+{% block content %}
+<div class="settings-container">
+    <h2>Account Settings</h2>
+    <form method="POST" action="{{ url_for('settings') }}">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" value="{{ current_user.email }}" disabled>
+
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" value="{{ current_user.username }}" disabled>
+
+        <label for="password">Change Password</label>
+        <input type="password" id="password" name="password" placeholder="New password">
+
+        <button type="submit">Update Password</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}SoulSwipe{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    {% block head %}{% endblock %}
+</head>
+<body class="{% if current_user.is_authenticated %}authenticated{% endif %}">
+    <header>
+        <div class="logo-container">
+            <svg class="logo" width="48" height="48" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="45" fill="none" stroke="#f72585" stroke-width="8" />
+                <path d="M30,30 Q50,10 70,30 T90,50 T70,70 T50,90 T30,70 T10,50 T30,30" fill="none" stroke="#4cc9f0" stroke-width="5" stroke-linecap="round" />
+                <circle cx="10" cy="10" r="5" fill="#3a0ca3" />
+            </svg>
+            <h1 class="logo-text">SoulSwipe</h1>
+        </div>
+        <div class="nav-links">
+            {% if current_user.is_authenticated %}
+                <a href="{{ url_for('dashboard') }}"></a>
+                <a href="{{ url_for('profile') }}"></a>
+                <a href="{{ url_for('logout') }}"></a>
+            {% else %}
+                <a href="{{ url_for('login') }}"></a>
+                <a href="{{ url_for('signup') }}"></a>
+            {% endif %}
+        </div>
+    </header>
+
+    <nav>
+        <a href="{{ url_for('home') }}"></a>
+        <a href="{{ url_for('about') }}"></a>
+        <a href="{{ url_for('premium') }}"></a>
+        <a href="{{ url_for('signup') }}"></a>
+        <a href="{{ url_for('login') }}"></a>
+    </nav>
+
+    <main>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        {% block content %}{% endblock %}
+    </main>
+
+    {% if request.endpoint != 'dashboard','messages','profile' %}
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">SoulSwipe</div>
+            <div class="footer-links">
+                <a href="#">About Us</a>
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+                <a href="#">Contact</a>
+            </div>
+            <p class="copyright">© 2025 SoulSwipe. All rights reserved.</p>
+        </div>
+    </footer>
+    {% endif %}
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

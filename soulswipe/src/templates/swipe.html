@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SoulSwipe - Swipe</title>
+</head>
+<body>
+    <h2>Find Your Match!</h2>
+    {% if users %}
+        <ul>
+        {% for user in users %}
+            <li>
+                <strong>{{ user.username }}</strong> (Age: {{ user.age }})<br>
+                Bio: {{ user.bio }}
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No users to swipe yet.</p>
+    {% endif %}
+    <p><a href="{{ url_for('home') }}">Back to Home</a></p>
+    <p><a href="{{ url_for('signup') }}">Sign up</a></p>
+</body>
+</html>
