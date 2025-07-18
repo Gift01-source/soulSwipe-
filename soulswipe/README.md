@@ -20,7 +20,8 @@ User Profiles: Create and customize your profile with photos and personal inform
 
 - Python 3.x
 - HTML/CSS/JS (for frontend)
-- (Optional) A web server like Flask or Django
+- (Optional) A web server like Flask
+- 
 
 ### Installation
 
